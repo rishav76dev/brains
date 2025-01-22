@@ -1,6 +1,8 @@
-import express from "express"
-import { UserModel } from "./db";
+import express from "express";
+import { LinkModel, UserModel,ContentModel  } from "./db";
 import { userMiddleware } from "./middlewares";
+import jwt from "jsonwebtoken";
+import { random } from "secrets.js-grempe";
 
 const app = express();
 app.use(express.json());
@@ -80,18 +82,63 @@ app.delete("/api/v1/content", userMiddleware, async(req, res) =>{
         userId: req.userId
     })
 
-    res.josn ({
+    res.json ({
         message: " Deleted Successfully"
     })
 
 })
 
 
-app.post("/api/v1/brain/share", (req, res) =>{
+app.post("/api/v1/brain/share", userMiddleware, async(req, res) =>{
+    const share = req.body.share;
+    if (share){
+        await LinkModel.create({
+            userId: req.userId,
+            hash: random(10)
+
+        })
+    }else {
+        await LinkModel.deleteOne({
+            userId: req.userId
+        });
+    }
 
 })
 
-app.get("api/v1/brain/:sharelink", (req,res) =>{
+app.get("api/v1/brain/:sharelink", (req, res) =>{
+    const hash = req.params.shareLink;
+
+    const link = await LinkModel.findOne({
+        hash
+
+    });
+
+    if (!link){
+        res.status(411).json({
+            message: " Sorry incorrected input"
+        })
+        return ;
+    }
+
+    const content = await ContentModel.find({
+        userId: link.userId
+    })
+
+    const user = await UserModel.findOne({
+        userId: link.userId
+    })
+
+    if(!user){
+        res.status(411).json({
+            message: " user not found , error should ideally not happen"
+        })
+        return;
+    }
+
+    res.json({
+        username: user.username,
+        content: content
+    })
 
 })
 

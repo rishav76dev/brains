@@ -8,9 +8,17 @@ const UserSchema = new Schema({
 export const UserModel =  model("User", UserSchema);
 
 
-const SontentSchema = new Schema({
+const ContentSchema = new Schema({
     title: String,
     link: String,
     tags: [{types: mongoose.Types.ObjectId, ref: 'Tag'}],
     userId: {type: mongoose.Types.ObjectId, ref: 'User', required: true }
 })
+
+const LinkSchema = new Schema ({
+    hash: String,
+    userId: { type: mongoose.Types.ObjectId, ref: 'User' , requires: true ,unique: true},
+})
+
+export const LinkModel = model("Link", LinkSchema);
+export const ContentModel = model("Content", ContentSchema);
