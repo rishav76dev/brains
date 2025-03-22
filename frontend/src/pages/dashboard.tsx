@@ -5,7 +5,7 @@ import { CreateContentModal } from "../components/CreateContentModal"
 import { PlusIcon } from "../icons/PlusIcon"
 import { ShareIcon } from "../icons/ShareIcon"
 import { Sidebar } from "../components/Sidebar"
-import { useContent } from "../hooks/useContent"
+import { useContent } from "../hooks/userContent"
 import { BACKEND_URL } from "../config"
 import axios from "axios"
 

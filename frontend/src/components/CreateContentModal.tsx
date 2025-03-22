@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./Button";
-import { Input } from "./Input";
+import { Input } from "./input";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
 
@@ -11,7 +11,12 @@ enum ContentType {
 }
 
 // controlled component
-export function CreateContentModal({open, onClose}) {
+interface CreateContentModalProps {
+    open: boolean;
+    onClose: () => void;
+}
+
+export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
     const titleRef = useRef<HTMLInputElement>();
     const linkRef = useRef<HTMLInputElement>();
     const [type, setType] = useState(ContentType.Youtube);
