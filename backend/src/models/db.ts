@@ -1,4 +1,4 @@
-import mongoose, {model, Model, Schema} from "mongoose"
+import mongoose, {model, Schema} from "mongoose"
 
 const UserSchema = new Schema({
     username: { type: String, unique: true},
@@ -17,7 +17,7 @@ const ContentSchema = new Schema({
 
 const LinkSchema = new Schema ({
     hash: String,
-    userId: { type: mongoose.Types.ObjectId, ref: 'User' , requires: true ,unique: true},
+    userId: { type: mongoose.Types.ObjectId, ref: 'User' , required: true ,unique: true},
 })
 
 export const LinkModel = model("Link", LinkSchema);
