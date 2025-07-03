@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { ContentModel, LinkModel, UserModel } from "../models/db";
-
+import { random } from "../utils/random";
 
 export const addContent = async (req: Request, res: Response) => {
   try {

@@ -1,14 +1,14 @@
 import express from "express";
 import dotenv from "dotenv";
-import connectToMongo from "./utils/connectDB";
+import connectDB from "./utils/connectDB";
 import cors from "cors"
-import authRoute from './routes/authRoutes'
+import AuthRoute from './routes/authRoutes'
 import UserRoute from './routes/userRoutes'
 
 //initialize express app
 const app = express();
 
-
+connectDB()
 
 //middleware
 app.use(cors());
@@ -17,7 +17,6 @@ app.use(express.json());
 
 
 dotenv.config();
-connectToMongo();
 
 app.use("/api/v1/user",AuthRoute )
 app.use("/api/v1",UserRoute)
