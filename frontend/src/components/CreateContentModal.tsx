@@ -56,10 +56,12 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
                             <Input reference={titleRef} placeholder={"Title"} />
                             <Input reference={linkRef} placeholder={"Link"} />
                         </div>
-                        <div>
+                        <div> 
                             <h1>Type</h1>
                             <div className="flex gap-1 justify-center pb-2">
-                                <Button text="Youtube" variant={type === ContentType.Youtube ? "primary" : "secondary"} onClick={() => {
+                                <Button 
+                                   text="Youtube" variant={type === ContentType.Youtube ? "primary" : "secondary"} 
+                                   onClick={() => {
                                     setType(ContentType.Youtube)
                                 }}></Button>
                                 <Button text="Twitter" variant={type === ContentType.Twitter ? "primary" : "secondary"} onClick={() => {

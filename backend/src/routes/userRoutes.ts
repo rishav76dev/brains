@@ -4,7 +4,7 @@ import { userMiddleware } from "../middleware/middlewares";
 
 const router = express.Router()
 
-router.post("/content",addContent);
+router.post("/content",userMiddleware, addContent);
 
 
 router.get("/content",userMiddleware, getUserContent);

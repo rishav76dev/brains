@@ -25,7 +25,6 @@ export const addContent = async (req: Request, res: Response) => {
   }
 };
 
-
 export const getUserContent = async (req: Request, res: Response) => {
   try {
     // @ts-ignore
@@ -92,8 +91,6 @@ export const getSharedContent = async (req: Request, res: Response) => {
     content,
   });
 };
-
-
 
 export const shareContentLink = async (req: Request, res: Response) => {
   const { share } = req.body;
