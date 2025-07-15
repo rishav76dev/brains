@@ -18,6 +18,8 @@ export function Dashboard() {
   }, [modalOpen])
 
   return <div>
+
+    
     <Sidebar />
     <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
       <CreateContentModal open={modalOpen} onClose={() => {
@@ -41,7 +43,8 @@ export function Dashboard() {
       </div>
 
       <div className="flex gap-4 flex-wrap">
-        {contents.map(({type, link, title}) => <Card 
+        {contents.map(({type, link, title}) => <Card
+            key={title}
             type={type}
             link={link}
             title={title}
