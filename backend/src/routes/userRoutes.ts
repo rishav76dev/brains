@@ -10,7 +10,7 @@ router.post("/content",userMiddleware, addContent);
 router.get("/content",userMiddleware, getUserContent);
 
 
-router.delete("/content", userMiddleware,deleteUserContent);
+router.delete("/content/:id", userMiddleware,deleteUserContent);
 
 
 

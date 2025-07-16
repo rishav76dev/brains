@@ -41,14 +41,14 @@ function getYoutubeEmbedLink(link: string) {
 
 async function deleteContent(contentId: string) {
   try {
-    console.log("Attempting to delete content with id:", contentId); // add this
-    const response = await axios.delete(`${BACKEND_URL}/api/v1/content`, {
+    // console.log("Attempting to delete content with id:", contentId);
+    const response = await axios.delete(`${BACKEND_URL}/api/v1/content/${contentId}`, {
       data: { Id: contentId },
       headers: {
         Authorization: localStorage.getItem("token"),
       },
     });
-    console.log("Delete successful", response.data); // add this
+    // console.log("Delete successful", response.data); add this
     return response.data;
   } catch (error) {
     console.error("Error deleting the content", error);

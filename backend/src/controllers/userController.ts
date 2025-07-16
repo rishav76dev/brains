@@ -47,23 +47,33 @@ export const getUserContent = async (req: Request, res: Response) => {
 };
 
 
- export const deleteUserContent = async (req: Request, res: Response) => {
+export const deleteUserContent = async (req: Request, res: Response) => {
   try {
-    const contentId = req.body.Id;
+    // console.log("Params:", req.params);
+    const contentId = req.params.id;
     // @ts-ignore
     const userId = req.userId;
-    await ContentModel.deleteOne({
+
+    const result = await ContentModel.deleteOne({
       _id: contentId,
       userId,
     });
 
+    // console.log("DeleteOne result:", result);
 
-    res.json({ message: "deleted content " });
+    if (result.deletedCount === 0) {
+      console.log("No document matched for deletion.");
+      return res.status(404).json({ message: "No content found to delete." });
+     }
+
+    // console.log("Deleted successfully");
+    res.json({ message: "Deleted content" });
   } catch (error: any) {
-    console.log("fuck you")
+    console.log("Error in deleteUserContent:", error);
     res.status(500).json({ error: error.message });
   }
 };
+
 
 export const getSharedContent = async (req: Request, res: Response) => {
   const hash = req.params.shareLink;
