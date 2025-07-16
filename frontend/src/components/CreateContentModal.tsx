@@ -7,7 +7,8 @@ import axios from "axios";
 
 enum ContentType {
     Youtube = "youtube",
-    Twitter = "twitter"
+    Twitter = "twitter",
+    Document = "document"
 }
 
 // controlled component
@@ -40,14 +41,15 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
     }
 
     return <div>
-        {open && <div> 
+        {open && <div>
             <div className="w-screen h-screen bg-slate-500 fixed top-0 left-0 opacity-60 flex justify-center">
-               
+
             </div>
             <div className="w-screen h-screen fixed top-0 left-0 flex justify-center">
                 <div className="flex flex-col justify-center">
                     <span className="bg-white opacity-100 p-4 rounded fixed">
                         <div className="flex justify-end">
+
                             <div onClick={onClose} className="cursor-pointer">
                                 <CrossIcon />
                             </div>
@@ -56,16 +58,20 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
                             <Input reference={titleRef} placeholder={"Title"} />
                             <Input reference={linkRef} placeholder={"Link"} />
                         </div>
-                        <div> 
+                        <div>
                             <h1>Type</h1>
                             <div className="flex gap-1 justify-center pb-2">
-                                <Button 
-                                   text="Youtube" variant={type === ContentType.Youtube ? "primary" : "secondary"} 
+                                <Button
+                                   text="Youtube" variant={type === ContentType.Youtube ? "primary" : "secondary"}
                                    onClick={() => {
                                     setType(ContentType.Youtube)
                                 }}></Button>
                                 <Button text="Twitter" variant={type === ContentType.Twitter ? "primary" : "secondary"} onClick={() => {
                                     setType(ContentType.Twitter)
+                                }}></Button>
+                                {/* to do button of document */}
+                                <Button text="Document" variant={type === ContentType.Twitter ? "primary" : "secondary"} onClick={() => {
+                                    setType(ContentType.Document)
                                 }}></Button>
                             </div>
                         </div>
@@ -73,9 +79,9 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
                             <Button onClick={addContent} variant="primary" text="Submit" />
                         </div>
                     </span>
-                </div>     
+                </div>
             </div>
-            
+
         </div>}
     </div>
 

@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { ShareIcon } from "../icons/ShareIcon";
 import { DeleteIcon } from "../icons/DeleteIcon";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
 
 interface CardProps {
   title: string;
   link: string;
   type: "twitter" | "youtube";
+  contentId: string;
 }
 
 function getYoutubeEmbedLink(link: string) {
@@ -14,7 +17,7 @@ function getYoutubeEmbedLink(link: string) {
 
     if (url.hostname === "youtu.be") {
       const id = url.pathname.slice(1);
-      const cleanId = id.split('?')[0];
+      const cleanId = id.split("?")[0];
       return `https://www.youtube.com/embed/${cleanId}`;
     }
 
@@ -36,12 +39,26 @@ function getYoutubeEmbedLink(link: string) {
   }
 }
 
-export function Card({ title, link, type }: CardProps) {
+async function deleteContent(contentId: string) {
+  try {
+    console.log("Attempting to delete content with id:", contentId); // add this
+    const response = await axios.delete(`${BACKEND_URL}/api/v1/content`, {
+      data: { Id: contentId },
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    console.log("Delete successful", response.data); // add this
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting the content", error);
+    throw error;
+  }
+}
+
+export function Card({ title, link, type, contentId }: CardProps) {
   const [iframeError, setIframeError] = useState(false);
   const embedUrl = getYoutubeEmbedLink(link);
-
-  console.log("Original link:", link);
-  console.log("Generated embed URL:", embedUrl);
 
   useEffect(() => {
     if (type === "twitter") {
@@ -71,8 +88,18 @@ export function Card({ title, link, type }: CardProps) {
                 <ShareIcon />
               </a>
             </div>
+
             <div className="text-gray-500">
-              <DeleteIcon />
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  console.log("deletebutton is clicked") // prevent scroll
+                  deleteContent(contentId);
+                }}
+              >
+                <DeleteIcon />
+              </a>
             </div>
           </div>
         </div>
@@ -80,8 +107,6 @@ export function Card({ title, link, type }: CardProps) {
         <div className="pt-4">
           {type === "youtube" && (
             <div>
-
-
               <iframe
                 className="w-full aspect-video rounded-lg border-0"
                 src={embedUrl}
@@ -92,14 +117,18 @@ export function Card({ title, link, type }: CardProps) {
                   console.error("YouTube iframe error:", e);
                   setIframeError(true);
                 }}
-                onLoad={() => console.log("YouTube iframe loaded successfully")}
               />
 
               {/* Fallback if iframe fails */}
               {iframeError && (
                 <div className="mt-2 p-2 bg-red-50 text-red-700 rounded text-sm">
                   Failed to load video.
-                  <a href={link} target="_blank" rel="noopener noreferrer" className="underline ml-1">
+                  <a
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline ml-1"
+                  >
                     Open in YouTube
                   </a>
                 </div>

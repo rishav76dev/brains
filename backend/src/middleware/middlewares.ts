@@ -36,7 +36,7 @@ export const userMiddleware = (
     req.userId = decoded.id;
     next();
 
-    
+
   } catch (error) {
     console.error("Authentication error:", error);
 

@@ -56,10 +56,11 @@ export const getUserContent = async (req: Request, res: Response) => {
       _id: contentId,
       userId,
     });
-    
+
 
     res.json({ message: "deleted content " });
   } catch (error: any) {
+    console.log("fuck you")
     res.status(500).json({ error: error.message });
   }
 };

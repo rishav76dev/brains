@@ -1,19 +1,32 @@
+
+import DocumentIcon from "../icons/DocumentIcon";
 import { Logo } from "../icons/Logo";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
 import { SidebarItem } from "./SidebarItem";
 
+
 export function Sidebar() {
-    return <div className="h-screen bg-white border-r w-72 fixed left-0 top-0 pl-6">
-        <div className="flex text-2xl pt-8 items-center">
-            <div className="pr-2 text-purple-600">
-                <Logo />
-            </div>
-            Brainly
-        </div>
-        <div className="pt-8 pl-4">
-            <SidebarItem text="Twitter" icon={<TwitterIcon />} />
-            <SidebarItem text="Youtube" icon={<YoutubeIcon />} />
-        </div>
+  return (
+    <div
+      className="
+        hidden sm:fixed sm:top-0 sm:left-0 sm:h-screen
+        sm:bg-white sm:border-r sm:pl-6 sm:pr-4 sm:py-6
+        sm:flex sm:flex-col sm:w-56 lg:w-72
+      "
+    >
+      <div className="flex items-center space-x-2 text-purple-600 mb-8">
+        <Logo />
+        <span className="text-xl font-semibold text-gray-800">Brainly</span>
+      </div>
+
+      <div className="space-y-4">
+        <SidebarItem text="Twitter" icon={<TwitterIcon />} />
+        <SidebarItem text="YouTube" icon={<YoutubeIcon />} />
+        <SidebarItem text="Docs" icon={<DocumentIcon />} />
+      </div>
     </div>
+  );
 }
+
+
