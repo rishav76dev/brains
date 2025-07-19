@@ -1,4 +1,5 @@
 
+import { AllIcon } from "../icons/AllIcon";
 import DocumentIcon from "../icons/DocumentIcon";
 import { Logo } from "../icons/Logo";
 import { TwitterIcon } from "../icons/TwitterIcon";
@@ -6,7 +7,7 @@ import { YoutubeIcon } from "../icons/YoutubeIcon";
 import { SidebarItem } from "./SidebarItem";
 
 
-export function Sidebar() {
+export function Sidebar({ onSelectType }: { onSelectType: (type: string | null) => void }) {
   return (
     <div
       className="
@@ -21,9 +22,10 @@ export function Sidebar() {
       </div>
 
       <div className="space-y-4">
-        <SidebarItem text="Twitter" icon={<TwitterIcon />} />
-        <SidebarItem text="YouTube" icon={<YoutubeIcon />} />
-        <SidebarItem text="Docs" icon={<DocumentIcon />} />
+        <SidebarItem text="All" icon={<AllIcon />} onClick={() => onSelectType(null)} />
+        <SidebarItem text="Twitter" icon={<TwitterIcon />} onClick={() => onSelectType("twitter")} />
+        <SidebarItem text="YouTube" icon={<YoutubeIcon />} onClick={() => onSelectType("youtube")} />
+        <SidebarItem text="Docs" icon={<DocumentIcon />} onClick={() => onSelectType("document")} />
       </div>
     </div>
   );

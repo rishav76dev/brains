@@ -11,8 +11,20 @@ import axios from "axios";
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
-  const { contents, refresh } = useContent();
-  console.log("Contents:", contents);
+  type Content = {
+    _id: string;
+    title: string;
+    link: string;
+     type: "twitter" | "youtube";
+
+  };
+
+  const { contents, refresh } = useContent() as { contents: Content[]; refresh: () => void };
+  const [selectedType, setSelectedType] = useState<string | null>(null);
+  const filteredContents = selectedType
+    ? contents.filter((c) => c.type === selectedType.toLowerCase())
+    : contents;
+  // console.log("Contents:", contents);
 
   useEffect(() => {
     refresh();
@@ -20,7 +32,7 @@ export function Dashboard() {
 
   return (
     <div>
-      <Sidebar />
+      <Sidebar onSelectType={setSelectedType} />
       <div className="p-4 lg:ml-72 sm:ml-56 min-h-screen bg-gray-100 border-2">
         <CreateContentModal
           open={modalOpen}
@@ -59,16 +71,20 @@ export function Dashboard() {
           </div>
         </div>
 
-        <div className="flex gap-4 flex-wrap">
-          {contents.map(({ type, link, title, _id }) => (
-            <Card
-              key={_id}
-              type={type}
-              link={link}
-              title={title}
-              contentId={_id} // fix: pass _id as contentId
-            />
-          ))}
+        <div className=" flex flex-wrap gap-4">
+          {filteredContents.length > 0 ? (
+            filteredContents.map((item) => (
+              <Card
+                key={item._id}
+                title={item.title}
+                link={item.link}
+                type={item.type}
+                contentId={item._id}
+              />
+            ))
+          ) : (
+            <p className="text-gray-500">No content found.</p>
+          )}
         </div>
       </div>
     </div>
