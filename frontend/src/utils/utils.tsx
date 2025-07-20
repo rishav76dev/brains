@@ -46,8 +46,6 @@ async function deleteContent(contentId: string) {
   }
 }
 
-
-
 export async function signup(username: string, password: string, navigate: (path: string) => void) {
     await axios.post(BACKEND_URL + "/api/v1/signup", {
         username,
