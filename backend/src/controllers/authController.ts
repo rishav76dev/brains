@@ -18,14 +18,27 @@ export const signup = async (req: Request, res: Response): Promise<void> => {
     const password = req.body.password;
 
     try {
-        await UserModel.create({ username, password });
 
+        const existingUser = await UserModel.findOne({ username });
+        if(existingUser){
+            res.json({
+                message: "Username is taken already"
+            })
+            return;
+        }
+        const newUser = await UserModel.create({ username, password });
+
+        const token = jwt.sign({ id: newUser._id }, JWT_SECRET);
+         res.status(201).json({
+            message: "User signed up successfully",
+            token,
+        });
         res.status(200).json({
             message: "User signed up",
         });
     } catch (error) {
         res.status(411).json({
-            message: "User already exists",
+            message: "Internal server error",
         });
     }
 };

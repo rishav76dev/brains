@@ -45,17 +45,17 @@ async function deleteContent(contentId: string) {
     throw error;
   }
 }
-
-export async function signup(username: string, password: string, navigate: (path: string) => void) {
-    await axios.post(BACKEND_URL + "/api/v1/signup", {
+ async function signup(username: string, password: string, navigate: (path: string) => void) {
+    const response = await axios.post(BACKEND_URL + "/api/v1/signup", {
         username,
         password
     });
-    navigate("/signin");
-    alert("You have signed up!");
+    const jwt = response.data.token;
+    localStorage.setItem("token", jwt);
+    navigate("/dashboard");
 }
 
-export async function signin(username: string, password: string, navigate: (path: string) => void) {
+async function signin(username: string, password: string, navigate: (path: string) => void) {
     const response = await axios.post(BACKEND_URL + "/api/v1/user/signin", {
         username,
         password
@@ -66,4 +66,4 @@ export async function signin(username: string, password: string, navigate: (path
 }
 
 
-export { deleteContent, getYoutubeEmbedLink,  };
+export { deleteContent, getYoutubeEmbedLink, signin, signup};
