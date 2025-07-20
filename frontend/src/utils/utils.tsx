@@ -47,6 +47,25 @@ async function deleteContent(contentId: string) {
 }
 
 
- 
+
+export async function signup(username: string, password: string, navigate: (path: string) => void) {
+    await axios.post(BACKEND_URL + "/api/v1/signup", {
+        username,
+        password
+    });
+    navigate("/signin");
+    alert("You have signed up!");
+}
+
+export async function signin(username: string, password: string, navigate: (path: string) => void) {
+    const response = await axios.post(BACKEND_URL + "/api/v1/user/signin", {
+        username,
+        password
+    });
+    const jwt = response.data.token;
+    localStorage.setItem("token", jwt);
+    navigate("/dashboard");
+}
+
 
 export { deleteContent, getYoutubeEmbedLink,  };
