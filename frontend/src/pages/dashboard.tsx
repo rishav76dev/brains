@@ -15,7 +15,8 @@ export function Dashboard() {
     _id: string;
     title: string;
     link: string;
-     type: "twitter" | "youtube";
+     type: "twitter" | "youtube" |"document";
+     description: string;
 
   };
 
@@ -80,6 +81,7 @@ export function Dashboard() {
                 link={item.link}
                 type={item.type}
                 contentId={item._id}
+                description={item.description}
               />
             ))
           ) : (

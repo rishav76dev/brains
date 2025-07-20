@@ -7,15 +7,17 @@ import { getYoutubeEmbedLink,deleteContent } from "../utils/utils";
 interface CardProps {
   title: string;
   link: string;
-  type: "twitter" | "youtube";
+  type: "twitter" | "youtube" | "document";
   contentId: string;
+  description?: string;
 }
 
 
 
-export function Card({ title, link, type, contentId }: CardProps) {
+export function Card({ title, link, type, contentId, description}: CardProps) {
   const [iframeError, setIframeError] = useState(false);
   const embedUrl = getYoutubeEmbedLink(link);
+  const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
     if (type === "twitter") {
@@ -28,6 +30,11 @@ export function Card({ title, link, type, contentId }: CardProps) {
       };
     }
   }, [type, link]);
+
+  const truncateText = (text: string, maxLength: number) => {
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + "...";
+  };
 
   return (
     <div>
@@ -97,6 +104,22 @@ export function Card({ title, link, type, contentId }: CardProps) {
             <blockquote className="twitter-tweet">
               <a href={link.replace("x.com", "twitter.com")}></a>
             </blockquote>
+          )}
+
+          {type === "document" && description && (
+            <div className="bg-gray-50 rounded-lg p-3 border">
+              <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
+                {isExpanded ? description : truncateText(description, 150)}
+              </div>
+              {description.length > 150 && (
+                <button
+                  onClick={() => setIsExpanded(!isExpanded)}
+                  className="mt-2 text-blue-500 hover:text-blue-700 text-xs font-medium"
+                >
+                  {isExpanded ? "Show Less" : "Show More"}
+                </button>
+              )}
+            </div>
           )}
         </div>
       </div>
