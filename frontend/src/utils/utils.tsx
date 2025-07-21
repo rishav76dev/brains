@@ -65,5 +65,10 @@ async function signin(username: string, password: string, navigate: (path: strin
     navigate("/dashboard");
 }
 
+async function logout(navigate: (path: string) => void) {
+  localStorage.removeItem("token");
+  navigate("/signin")
+}
 
-export { deleteContent, getYoutubeEmbedLink, signin, signup};
+
+export { deleteContent, getYoutubeEmbedLink, signin, signup, logout};

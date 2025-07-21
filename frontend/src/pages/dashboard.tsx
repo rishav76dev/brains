@@ -15,12 +15,14 @@ export function Dashboard() {
     _id: string;
     title: string;
     link: string;
-     type: "twitter" | "youtube" |"document";
-     description: string;
-
+    type: "twitter" | "youtube" | "document";
+    description: string;
   };
 
-  const { contents, refresh } = useContent() as { contents: Content[]; refresh: () => void };
+  const { contents, refresh } = useContent() as {
+    contents: Content[];
+    refresh: () => void;
+  };
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const filteredContents = selectedType
     ? contents.filter((c) => c.type === selectedType.toLowerCase())
@@ -34,7 +36,7 @@ export function Dashboard() {
   return (
     <div>
       <Sidebar onSelectType={setSelectedType} />
-      <div className="p-4 lg:ml-72 sm:ml-56 min-h-screen bg-gray-100 border-2">
+      <div className="p-4 lg:ml-64 sm:ml-56 min-h-screen bg-gray-100 border-2">
         <CreateContentModal
           open={modalOpen}
           onClose={() => {
@@ -72,17 +74,21 @@ export function Dashboard() {
           </div>
         </div>
 
-        <div className=" flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-6">
           {filteredContents.length > 0 ? (
             filteredContents.map((item) => (
-              <Card
+              <div
                 key={item._id}
-                title={item.title}
-                link={item.link}
-                type={item.type}
-                contentId={item._id}
-                description={item.description}
-              />
+                className="flex-grow sm:flex-grow-0 basis-[250px] max-w-[300px]"
+              >
+                <Card
+                  title={item.title}
+                  link={item.link}
+                  type={item.type}
+                  contentId={item._id}
+                  description={item.description}
+                />
+              </div>
             ))
           ) : (
             <p className="text-gray-500">No content found.</p>

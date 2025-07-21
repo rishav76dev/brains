@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick?: () => void | Promise<void>;
   loading?: boolean;
   fullWidth?: boolean;
+  className?: string;
 }
 
 const variantClasses = {
