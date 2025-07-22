@@ -12,12 +12,12 @@ interface ButtonProps {
 }
 
 const variantClasses = {
-  primary: "bg-purple-600 text-white hover:bg-purple-700 focus:ring-purple-400",
+  primary: "bg-purple-600 text-white text-xl font-semibold hover:bg-purple-800 focus:ring-purple-400",
   secondary: "bg-purple-200 text-purple-700 hover:bg-purple-300 focus:ring-purple-300",
 };
 
 const defaultStyles =
-  "px-4 py-2 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed";
+  "px-4 py-2 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed border-2 border-black";
 
 export function Button({
   variant,

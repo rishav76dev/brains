@@ -1,7 +1,7 @@
 import { AllIcon } from "../icons/AllIcon";
 import DocumentIcon from "../icons/DocumentIcon";
 import { Logo } from "../icons/Logo";
-import { PlusIcon } from "../icons/PlusIcon";
+import Logout from "../icons/Logout";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
 import { logout } from "../utils/utils";
@@ -61,7 +61,7 @@ export function Sidebar({
             }
             variant="primary"
             text="Logout"
-            startIcon={<PlusIcon />}
+            startIcon={<Logout />}
             fullWidth={true}
           />
         </div>

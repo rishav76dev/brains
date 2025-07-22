@@ -3,6 +3,9 @@ import { ShareIcon } from "../icons/ShareIcon";
 import { DeleteIcon } from "../icons/DeleteIcon";
 
 import { getYoutubeEmbedLink,deleteContent } from "../utils/utils";
+import { TwitterIcon } from "../icons/TwitterIcon";
+import { YoutubeIcon } from "../icons/YoutubeIcon";
+import DocumentIcon from "../icons/DocumentIcon";
 
 interface CardProps {
   title: string;
@@ -42,7 +45,9 @@ export function Card({ title, link, type, contentId, description}: CardProps) {
         <div className="flex justify-between">
           <div className="flex items-center text-md">
             <div className="text-gray-500 pr-2">
-              <ShareIcon />
+              {type === "twitter" && <TwitterIcon />}
+              {type === "youtube" && <YoutubeIcon />}
+              {type === "document" && <DocumentIcon />}
             </div>
             {title}
           </div>
