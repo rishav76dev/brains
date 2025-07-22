@@ -1,10 +1,17 @@
-import React from 'react'
 
-export default function Landing() {
+import Hero from "../components/landing/Hero";
+import Header from "../components/landing/Header";
+import Footer from "../components/landing/Footer";
+
+export default function LandingPage() {
   return (
-    <div className=' mt-60 flex justify-center items-center'>You are at landing page 
-        it is still under development
-        Browse different routes
-    </div>
-  )
+<><div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-blue-200">
+
+      <Header />
+      <Hero />
+      </div>
+      <Footer />
+
+    </>
+  );
 }
