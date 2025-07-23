@@ -59,7 +59,7 @@ export default function Share() {
                   type={item.type}
                   contentId={item._id}
                   description={item.description}
-                  
+                  readOnly={true}
                 />
               </div>
             ))

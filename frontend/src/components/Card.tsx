@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ShareIcon } from "../icons/ShareIcon";
 import { DeleteIcon } from "../icons/DeleteIcon";
 
-import { getYoutubeEmbedLink,deleteContent } from "../utils/utils";
+import { getYoutubeEmbedLink, deleteContent } from "../utils/utils";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
 import DocumentIcon from "../icons/DocumentIcon";
@@ -13,11 +13,17 @@ interface CardProps {
   type: "twitter" | "youtube" | "document";
   contentId: string;
   description?: string;
+  readOnly?: boolean;
 }
 
-
-
-export function Card({ title, link, type, contentId, description}: CardProps) {
+export function Card({
+  title,
+  link,
+  type,
+  contentId,
+  description,
+  readOnly = false,
+}: CardProps) {
   const [iframeError, setIframeError] = useState(false);
   const embedUrl = getYoutubeEmbedLink(link);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -51,26 +57,28 @@ export function Card({ title, link, type, contentId, description}: CardProps) {
             </div>
             {title}
           </div>
-          <div className="flex items-center">
-            <div className="pr-2 text-gray-500">
-              <a href={link} target="_blank" rel="noopener noreferrer">
-                <ShareIcon />
-              </a>
-            </div>
+          {!readOnly && (
+            <div className="flex items-center">
+              <div className="pr-2 text-gray-500">
+                <a href={link} target="_blank" rel="noopener noreferrer">
+                  <ShareIcon />
+                </a>
+              </div>
 
-            <div className="text-gray-500">
-              <a
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault();
-                  console.log("deletebutton is clicked") // prevent scroll
-                  deleteContent(contentId);
-                }}
-              >
-                <DeleteIcon />
-              </a>
+              <div className="text-gray-500">
+                <a
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    console.log("deletebutton is clicked"); // prevent scroll
+                    deleteContent(contentId);
+                  }}
+                >
+                  <DeleteIcon />
+                </a>
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         <div className="pt-4">

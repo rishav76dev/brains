@@ -1,9 +1,10 @@
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ButtonL } from "./ButtonL";
 import { Logo } from "../../icons/Logo";
 
 export default function Header() {
+  const navigate = useNavigate();
   return (
     <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
@@ -22,10 +23,10 @@ export default function Header() {
             <Link to="#demo" className="text-gray-600 hover:text-gray-900 transition-colors">
               Demo
             </Link>
-            <ButtonL variant="outline" size="sm">
+            <ButtonL variant="outline" size="sm" onClick={()=> navigate("/signin")}>
               Sign In
             </ButtonL>
-            <ButtonL size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600">
+            <ButtonL size="sm" className="bg-gradient-to-r from-blue-600 to-purple-600" onClick={()=> navigate("/signup")}>
               Get Started
             </ButtonL>
           </nav>

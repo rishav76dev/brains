@@ -1,8 +1,10 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import { ButtonL } from "./ButtonL";
+import { useNavigate } from "react-router-dom";
 
 export default function Hero() {
+  const navigate = useNavigate();
   return (
     <section className="py-20 px-4">
       <div className="container mx-auto text-center max-w-4xl">
@@ -22,6 +24,7 @@ export default function Hero() {
           <ButtonL
             size="lg"
             className="bg-gradient-to-r from-blue-300 to-purple-600 text-lg px-8"
+            onClick={()=> navigate("/signup")}
           >
             Get Started
             <ArrowRight className="w-5 h-5 ml-2" />
@@ -30,6 +33,7 @@ export default function Hero() {
             variant="outline"
             size="lg"
             className="text-lg px-8 bg-transparent"
+            onClick={()=> navigate("/signup")}
           >
             Watch Demo
           </ButtonL>

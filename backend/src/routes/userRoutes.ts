@@ -16,6 +16,6 @@ router.delete("/content/:id", userMiddleware,deleteUserContent);
 
 router.post("/brain/share", userMiddleware , shareContentLink);
 
-router.get("/brain/:shareLink", getSharedContent);
+router.get("/brain/share/:shareLink", getSharedContent);
 
 export default router;
