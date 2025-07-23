@@ -7,6 +7,7 @@ import { ShareIcon } from "../icons/ShareIcon";
 import { Sidebar } from "../components/Sidebar";
 import { useContent } from "../hooks/userContent";
 import { BACKEND_URL } from "../config";
+import toast from "react-hot-toast";
 import axios from "axios";
 
 export function Dashboard() {
@@ -53,20 +54,28 @@ export function Dashboard() {
               text="Add content"
               startIcon={<PlusIcon />}
             />
+
             <Button
               onClick={async () => {
-                const response = await axios.post(
-                  `${BACKEND_URL}/api/v1/brain/share`,
-                  { share: true },
-                  {
-                    headers: {
-                      Authorization: localStorage.getItem("token"),
-                    },
-                  }
-                );
-                const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
-                 await navigator.clipboard.writeText(shareUrl);
-                alert("Share link copied to clipboard:\n" + shareUrl);
+                try {
+                  const response = await axios.post(
+                    `${BACKEND_URL}/api/v1/brain/share`,
+                    { share: true },
+                    {
+                      headers: {
+                        Authorization: localStorage.getItem("token"),
+                      },
+                    }
+                  );
+                  const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
+
+                  await navigator.clipboard.writeText(shareUrl);
+
+                  toast.success("Share link copied to clipboard!");
+                } catch (error) {
+                  console.error(error);
+                  toast.error("Failed to generate share link.");
+                }
               }}
               variant="secondary"
               text="Share brain"

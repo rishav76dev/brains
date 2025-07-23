@@ -4,6 +4,7 @@ import { Button } from "./Button";
 import { Input } from "./input";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 enum ContentType {
   Youtube = "youtube",
@@ -24,27 +25,28 @@ export function CreateContentModal({ open, onClose }: CreateContentModalProps) {
   const [type, setType] = useState(ContentType.Youtube);
 
   async function addContent() {
-    const title = titleRef.current?.value;
-    const link = linkRef.current?.value;
-    const description = descriptionRef.current?.value;
+  const title = titleRef.current?.value;
+  const link = linkRef.current?.value;
+  const description = descriptionRef.current?.value;
 
+  try {
     await axios.post(
       `${BACKEND_URL}/api/v1/content`,
-      {
-        link,
-        title,
-        type,
-        description
-      },
+      { link, title, type, description },
       {
         headers: {
           Authorization: localStorage.getItem("token"),
         },
       }
     );
-
+    toast.success("Content added successfully!");
     onClose();
+  } catch (error) {
+    console.error(error);
+    toast.error("Failed to add content. Please try again.");
   }
+}
+
 
   return (
     <>

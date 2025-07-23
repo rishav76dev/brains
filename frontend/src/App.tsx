@@ -5,15 +5,19 @@ import { Dashboard } from "./pages/dashboard";
 import Landing from "./pages/Landing";
 import Notfound from "./pages/Notfound";
 import Share from "./pages/Share";
+import { Toaster } from "react-hot-toast";
+
 function App() {
   return (
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
+
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/share/:shareLink" element={<Share />} /> 
+        <Route path="/share/:shareLink" element={<Share />} />
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
