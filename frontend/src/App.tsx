@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Dashboard } from "./pages/dashboard";
 import Landing from "./pages/Landing";
 import Notfound from "./pages/Notfound";
+import Share from "./pages/Share";
 function App() {
   return (
     <BrowserRouter>
@@ -12,6 +13,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/share/:shareLink" element={<Share />} /> 
         <Route path="*" element={<Notfound />} />
       </Routes>
     </BrowserRouter>
