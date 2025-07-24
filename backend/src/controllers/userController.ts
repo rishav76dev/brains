@@ -47,31 +47,28 @@ export const getUserContent = async (req: Request, res: Response) => {
 };
 
 
-export const deleteUserContent = async (req: Request, res: Response) => {
-  try {
-    // console.log("Params:", req.params);
-    const contentId = req.params.id;
-    // @ts-ignore
-    const userId = req.userId;
 
-    const result = await ContentModel.deleteOne({
-      _id: contentId,
-      userId,
-    });
+export const deleteUserContent = async (req: Request, res: Response): Promise<void> => {
+    try {
+        const contentId = req.params.id;
+        const userId = (req as any).userId as string; // Cast explicitly if `userId` is attached in auth middleware
 
-    // console.log("DeleteOne result:", result);
+        const result = await ContentModel.deleteOne({ _id: contentId, userId });
 
-    if (result.deletedCount === 0) {
-      console.log("No document matched for deletion.");
-      return res.status(404).json({ message: "No content found to delete." });
-     }
+        if (result.deletedCount === 0) {
+            console.warn(`No content found for deletion with id ${contentId} for user ${userId}.`);
+            res.status(404).json({ success: false, message: "No content found to delete." });
+            return;
+        }
 
-    // console.log("Deleted successfully");
-    res.json({ message: "Deleted content" });
-  } catch (error: any) {
-    console.log("Error in deleteUserContent:", error);
-    res.status(500).json({ error: error.message });
-  }
+        res.json({ success: true, message: "Content deleted successfully." });
+    } catch (error: unknown) {
+        console.error("Error deleting user content:", error);
+        res.status(500).json({
+            success: false,
+            message: error instanceof Error ? error.message : "An unknown error occurred",
+        });
+    }
 };
 
 
