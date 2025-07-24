@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { ShareIcon } from "../icons/ShareIcon";
 import { DeleteIcon } from "../icons/DeleteIcon";
-
 import { getYoutubeEmbedLink, deleteContent } from "../utils/utils";
 import { TwitterIcon } from "../icons/TwitterIcon";
 import { YoutubeIcon } from "../icons/YoutubeIcon";
 import DocumentIcon from "../icons/DocumentIcon";
+import toast from "react-hot-toast";
+import { useContent } from "../hooks/userContent";
 
 interface CardProps {
   title: string;
@@ -40,6 +41,8 @@ export function Card({
     }
   }, [type, link]);
 
+  const { refresh } = useContent();
+
   const truncateText = (text: string, maxLength: number) => {
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + "...";
@@ -47,10 +50,10 @@ export function Card({
 
   return (
     <div>
-      <div className="p-4 bg-white rounded-md border-gray-200 max-w-64 border min-h-48 min-w-64">
-        <div className="flex justify-between">
-          <div className="flex items-center text-md">
-            <div className="text-gray-500 pr-2">
+      <div className="p-4 bg-gray-50 rounded-lg border border-gray-300 shadow-sm max-w-64 min-w-64 min-h-48">
+        <div className="flex justify-between items-start">
+          <div className="flex items-center text-md font-medium text-gray-800">
+            <div className="pr-2 text-gray-600">
               {type === "twitter" && <TwitterIcon />}
               {type === "youtube" && <YoutubeIcon />}
               {type === "document" && <DocumentIcon />}
@@ -58,20 +61,31 @@ export function Card({
             {title}
           </div>
           {!readOnly && (
-            <div className="flex items-center">
-              <div className="pr-2 text-gray-500">
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                  <ShareIcon />
-                </a>
+            <div className="flex items-center gap-2">
+              <div
+                className="text-gray-600 cursor-pointer"
+                onClick={async () => {
+                  try {
+                    await navigator.clipboard.writeText(link);
+                    toast.success("Link copied to clipboard!");
+                  } catch (error) {
+                    console.error(error);
+                    toast.error("Failed to copy link.");
+                  }
+                }}
+              >
+                {(type === "twitter" || type === "youtube") && <ShareIcon />}
               </div>
 
-              <div className="text-gray-500">
+              <div className="text-gray-600 cursor-pointer">
                 <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    console.log("deletebutton is clicked"); // prevent scroll
-                    deleteContent(contentId);
+                    (async () => {
+                      await deleteContent(contentId);
+                      refresh();
+                    })();
                   }}
                 >
                   <DeleteIcon />
@@ -85,7 +99,7 @@ export function Card({
           {type === "youtube" && (
             <div>
               <iframe
-                className="w-full aspect-video rounded-lg border-0"
+                className="w-full aspect-video rounded-md border border-gray-300"
                 src={embedUrl}
                 title={title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -95,8 +109,6 @@ export function Card({
                   setIframeError(true);
                 }}
               />
-
-              {/* Fallback if iframe fails */}
               {iframeError && (
                 <div className="mt-2 p-2 bg-red-50 text-red-700 rounded text-sm">
                   Failed to load video.
@@ -120,14 +132,14 @@ export function Card({
           )}
 
           {type === "document" && description && (
-            <div className="bg-gray-50 rounded-lg p-3 border">
+            <div className="bg-gray-100 rounded-lg p-3 border border-gray-300">
               <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
                 {isExpanded ? description : truncateText(description, 150)}
               </div>
               {description.length > 150 && (
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="mt-2 text-blue-500 hover:text-blue-700 text-xs font-medium"
+                  className="mt-2 text-gray-600 hover:text-gray-800 text-xs font-medium"
                 >
                   {isExpanded ? "Show Less" : "Show More"}
                 </button>

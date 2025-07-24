@@ -1,7 +1,7 @@
 
 import Hero from "../components/landing/Hero";
 import Header from "../components/landing/Header";
-import Footer from "../components/landing/Footer";
+// import Footer from "../components/landing/Footer";
 
 export default function LandingPage() {
   return (
@@ -10,7 +10,7 @@ export default function LandingPage() {
       <Header />
       <Hero />
       </div>
-      <Footer />
+      {/* <Footer /> */}
 
     </>
   );

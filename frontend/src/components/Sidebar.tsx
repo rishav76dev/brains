@@ -15,12 +15,15 @@ export function Sidebar({
 }) {
   return (
     <div
-      className="
-        hidden sm:fixed sm:top-0 sm:left-0 sm:h-screen
-         sm:border-r sm:pl-6 sm:pr-4 sm:py-6
-        sm:flex sm:flex-col sm:w-56 lg:w-64
-      "
-    >
+  className="
+    hidden sm:fixed sm:top-0 sm:left-0 sm:h-screen
+    sm:border-r sm:pl-6 sm:pr-4 sm:py-6
+    sm:flex sm:flex-col sm:w-56 lg:w-64
+    bg-gradient-to-b from-purple-50 via-purple-100 to-purple-200
+     border-r-8 border-purple-300
+  "
+>
+
       <div className="flex items-center space-x-2 text-purple-600 mb-8">
         <Logo />
         <span className="text-xl font-semibold text-gray-800">Brainly</span>

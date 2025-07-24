@@ -52,8 +52,6 @@ export const signin = async (req: Request, res: Response): Promise<void> => {
 
     if (existingUser) {
         const token = jwt.sign({ id: existingUser._id }, JWT_SECRET);
-        console.log("Generated token:", token);
-
 
         res.status(200).json({ token });
     } else {

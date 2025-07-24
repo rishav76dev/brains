@@ -28,7 +28,6 @@ export function Dashboard() {
   const filteredContents = selectedType
     ? contents.filter((c) => c.type === selectedType.toLowerCase())
     : contents;
-  // console.log("Contents:", contents);
 
   useEffect(() => {
     refresh();
@@ -37,15 +36,16 @@ export function Dashboard() {
   return (
     <div>
       <Sidebar onSelectType={setSelectedType} />
-      <div className="p-4 lg:ml-64 sm:ml-56 min-h-screen bg-gray-100 border-2">
+      <div className="p-4 lg:ml-64 sm:ml-56 min-h-screen bg-gradient-to-br from-white via-indigo-100 to-purple-200  border-1-4 border-black">
         <CreateContentModal
           open={modalOpen}
-          onClose={() => {
-            setModalOpen(false);
-          }}
+          onClose={() => setModalOpen(false)}
         />
+
         <div className="flex justify-between items-center mb-10">
-          <h1 className="text-4xl font-semibold pl-9 px-5">All Notes</h1>
+          <h1 className="text-4xl font-semibold text-purple-700 pl-9 px-5">
+            All Notes
+          </h1>
 
           <div className="flex gap-4">
             <Button
@@ -68,9 +68,7 @@ export function Dashboard() {
                     }
                   );
                   const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
-
                   await navigator.clipboard.writeText(shareUrl);
-
                   toast.success("Share link copied to clipboard!");
                 } catch (error) {
                   console.error(error);
@@ -101,7 +99,7 @@ export function Dashboard() {
               </div>
             ))
           ) : (
-            <p className="text-gray-500">No content found.</p>
+            <p className="text-gray-600">No content found.</p>
           )}
         </div>
       </div>

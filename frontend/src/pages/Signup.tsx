@@ -29,7 +29,7 @@ export function Signup() {
           </p>
         </div>
 
-        <div className="space-y-4 pl-10">
+        <div className="space-y-4 ">
           <div>
             <p className="font-medium text-xl pl-2">Username</p>
             <Input reference={usernameRef} placeholder="Username" />
@@ -48,6 +48,15 @@ export function Signup() {
             text="Sign up"
             fullWidth={true}
           />
+          <p className="text-center text-gray-600 text-sm pt-4">
+            Already have an account?{" "}
+            <span
+              onClick={() => navigate("/signin")}
+              className="text-purple-600 hover:text-purple-800 cursor-pointer font-medium"
+            >
+              Sign in
+            </span>
+          </p>
         </div>
       </div>
     </div>
