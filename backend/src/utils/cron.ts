@@ -1,7 +1,7 @@
-import cron from "cron";
+import { CronJob } from "cron";
 import https from "https";
 
-const job = new cron.CronJob("*/14 * * * *", function () {
+const job = new CronJob("*/14 * * * *", function () {
   const apiUrl = process.env.API_URL;
   if (!apiUrl) {
     console.error("API_URL environment variable is not defined");
@@ -9,13 +9,17 @@ const job = new cron.CronJob("*/14 * * * *", function () {
   }
   https
     .get(apiUrl, (res) => {
-      if (res.statusCode === 200) console.log("GET request sent successfully");
-      else console.log("GET request failed", res.statusCode);
+      if (res.statusCode === 200) {
+        console.log("GET request sent successfully");
+      } else {
+        console.error("GET request failed with status:", res.statusCode);
+      }
     })
-    .on("error", (e) => console.error("Error while sending request", e));
+    .on("error", (e) => console.error("Error while sending request:", e));
 });
 
 export default job;
+
 
 
 // CRON JOB EXPLANATION:
