@@ -1,42 +1,49 @@
-Brains is a full-stack MERN (MongoDB, Express, React, Node.js) application that allows authenticated users to manage notes and learning content efficiently — enabling them to create, update, and delete their materials with ease.
+# 🧠 Brains
 
-🚀 Features
+**Brains** is a full-stack **MERN** (MongoDB, Express, React, Node.js) application that allows authenticated users to manage notes and learning content efficiently — enabling them to **create**, **update**, and **delete** their materials with ease.
 
-✅ User authentication with JWT
-✅ Create, edit, delete, and view notes/content
-✅ Responsive UI with a clean, modern design
-✅ RESTful API architecture
-✅ Modular, scalable code structure
+---
 
+## 🚀 Features
+- ✅ **User authentication** with JWT
+- ✅ **Create, edit, delete, and view** notes/content
+- ✅ **Responsive UI** with a clean, modern design
+- ✅ **RESTful API** architecture
+- ✅ **Modular, scalable** code structure
 
-🛠️ Tech Stack
-Frontend
+---
 
-React
-TypeScript
-Tailwind CSS
+## 📸 Screenshots
+*(Add screenshots here — e.g., Sign In page, Dashboard, Note Editor, etc.)*
 
-Backend
+---
 
-Node.js
-Express
-TypeScript
+## 🛠️ Tech Stack
 
-Database
+**Frontend**
+- React
+- TypeScript
+- Tailwind CSS
 
-MongoDB (via Mongoose)
+**Backend**
+- Node.js
+- Express
+- TypeScript
 
-Authentication
+**Database**
+- MongoDB (via Mongoose)
 
-JSON Web Token (JWT)
+**Authentication**
+- JSON Web Token (JWT)
 
-Deployment
+**Deployment**
+- **Backend:** Render
+- **Frontend:** Vercel
 
-Backend: Render
-Frontend: Vercel
+---
 
-
-📂 Project Structure
+## 📂 Project Structure
+```
 brains/
 │
 ├── client/              # React frontend
@@ -49,68 +56,113 @@ brains/
 │   └── ...
 │
 └── package.json         # Project metadata and scripts
+```
 
-⚙️ Environment Variables
-Backend (server/.env):
-iniPORT=5000
+---
+
+## ⚙️ Environment Variables
+
+**Backend (`server/.env`):**
+```ini
+PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-Frontend (client/.env):
-iniVITE_BACKEND_URL=http://localhost:5000
+```
 
-🧑‍💻 Local Development
-1️⃣ Clone the repository
-bashgit clone https://github.com/rishav76dev/brains.git
+**Frontend (`client/.env`):**
+```ini
+VITE_BACKEND_URL=http://localhost:5000
+```
+
+---
+
+## 🧑‍💻 Local Development
+
+### 1️⃣ Clone the repository
+```bash
+git clone https://github.com/rishav76dev/brains.git
 cd brains
-2️⃣ Install dependencies
-Backend
-bashcd server
+```
+
+### 2️⃣ Install dependencies
+
+**Backend**
+```bash
+cd server
 npm install
-Frontend
-bashcd ../client
+```
+
+**Frontend**
+```bash
+cd ../client
 npm install
-3️⃣ Run the development servers
-Backend
-bashnpm run dev
-Frontend
-bashnpm run dev
+```
 
-Frontend: http://localhost:5173
-Backend: http://localhost:5000
+### 3️⃣ Run the development servers
 
+**Backend**
+```bash
+npm run dev
+```
 
-🧪 API Endpoints (Server)
-MethodEndpointDescriptionPOST/api/auth/signupUser registrationPOST/api/auth/loginUser loginGET/api/contentGet all content for the userPOST/api/contentCreate new contentPUT/api/content/:idUpdate contentDELETE/api/content/:idDelete content
+**Frontend**
+```bash
+npm run dev
+```
 
-🌐 Deployment
+- Frontend: [http://localhost:5173](http://localhost:5173)
+- Backend: [http://localhost:5000](http://localhost:5000)
 
-Backend: Render, Railway, or any Node hosting service
-Frontend: Vercel, Netlify
+---
 
+## 🧪 API Endpoints (Server)
 
-🙌 Contributing
+| Method | Endpoint           | Description                  |
+|--------|-------------------|------------------------------|
+| POST   | `/api/auth/signup` | User registration            |
+| POST   | `/api/auth/login`  | User login                   |
+| GET    | `/api/content`     | Get all content for the user |
+| POST   | `/api/content`     | Create new content           |
+| PUT    | `/api/content/:id` | Update content               |
+| DELETE | `/api/content/:id` | Delete content               |
+
+---
+
+## 🌐 Deployment
+
+- **Backend:** Render
+- **Frontend:** Vercel
+
+---
+
+## 🙌 Contributing
+
 Pull requests are welcome!
 
-Fork the repository
-Create a feature branch
+1. Fork the repository
+2. Create a feature branch
+   ```bash
+   git checkout -b feature/your-feature
+   ```
+3. Commit your changes
+   ```bash
+   git commit -m "Add your feature"
+   ```
+4. Push to your branch
+   ```bash
+   git push origin feature/your-feature
+   ```
+5. Open a pull request
 
-bashgit checkout -b feature/your-feature
+---
 
-Commit your changes
+## 📝 License
 
-bashgit commit -m "Add your feature"
+This project is licensed under the **MIT License**.
 
-Push to your branch
+---
 
-bashgit push origin feature/your-feature
+## 📫 Contact
 
-Open a pull request
-
-
-📝 License
-This project is licensed under the MIT License.
-
-📫 Contact
-
-GitHub: @rishav76dev
-Twitter: @rishav76dev
+- **GitHub:** [@rishav76dev](https://github.com/rishav76dev)
+- **Twitter:** [@rishav76dev](https://twitter.com/rishav76)
