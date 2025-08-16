@@ -10,7 +10,7 @@ export default function Hero() {
   };
 
   return (
-    <section className="pt-40 min-h-screen px-4 bg-gradient-to-br from-white via-indigo-100 to-purple-400">
+    <section className="pt-40 min-h-screen px-4 dotted-bg">
       <div className="container mx-auto text-center max-w-4xl">
         <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full text-sm font-medium mb-6">
           <Sparkles className="w-4 h-4" />
