@@ -1,6 +1,6 @@
 interface InputProps {
     placeholder: string;
-    reference?: any;
+    reference?: React.Ref<HTMLInputElement>;
 }
 
 export function Input({ placeholder, reference }: InputProps) {
