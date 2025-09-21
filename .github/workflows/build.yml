@@ -1,0 +1,49 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name:  Checkout code
+        uses: actions/checkout@v4
+
+      - name:  Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: |
+            backend/package-lock.json
+            frontend/package-lock.json
+
+      # Backend
+      - name:  Install Backend Dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name:  Build Backend
+        working-directory: backend
+        run: npm run build
+
+      # Frontend
+      - name:  Install Frontend Dependencies
+        working-directory: frontend
+        run: npm ci
+
+      - name:  Run Frontend Lint
+        working-directory: frontend
+        run: npm run lint
+
+      - name:  Build Frontend
+        working-directory: frontend
+        run: npm run build
