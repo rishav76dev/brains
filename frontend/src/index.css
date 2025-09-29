@@ -1,8 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-.dotted-bg{
-    background-color: white;
-    background-image: radial-gradient(black 1px,transparent 1px);
-    background-size:20px 20px ;
+
+/* index.css */
+/* .app-background {
+  min-height: 100vh;
+  width: 100%;
+  background-color: white;
+  position: relative;
+  background-image:
+    linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+    radial-gradient(circle 500px at 0% 20%, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(circle 500px at 100% 0%, rgba(59, 130, 246, 0.3), transparent);
+  background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
+} */
+
+
+
+/* index.css
+.app-background {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background: white;
+  background-image:
+    linear-gradient(to right, rgba(71, 85, 105, 0.3) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(71, 85, 105, 0.3) 1px, transparent 1px),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.1) 40%, transparent 80%);
+  background-size: 32px 32px, 32px 32px, 100% 100%;
+} */
+
+
+/* index.css */
+.app-background {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: white;
+  background-image:
+    linear-gradient(to right, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(229, 231, 235, 0.8) 1px, transparent 1px),
+    radial-gradient(circle 500px at 20% 100%, rgba(139, 92, 246, 0.3), transparent),
+    radial-gradient(circle 500px at 100% 80%, rgba(59, 130, 246, 0.3), transparent);
+  background-size: 48px 48px, 48px 48px, 100% 100%, 100% 100%;
 }
