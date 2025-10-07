@@ -31,7 +31,7 @@ export function Dashboard() {
 
   useEffect(() => {
     refresh();
-  }, [modalOpen]);
+  }, [modalOpen, refresh]);
 
   return (
     <div>
@@ -67,12 +67,29 @@ export function Dashboard() {
                       },
                     }
                   );
-                  const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
-                  await navigator.clipboard.writeText(shareUrl);
-                  toast.success("Share link copied to clipboard!");
-                } catch (error) {
-                  console.error(error);
-                  toast.error("Failed to generate share link.");
+
+                  if (response.data && response.data.hash) {
+                    const baseUrl = window.location.origin;
+                    const shareUrl = `${baseUrl}/share/${response.data.hash}`;
+                    await navigator.clipboard.writeText(shareUrl);
+                    toast.success("Share link copied to clipboard!");
+                  } else {
+                    throw new Error("Invalid response from server");
+                  }
+                } catch (error: unknown) {
+                  console.error("Share error:", error);
+                  if (axios.isAxiosError(error)) {
+                    const status = error.response?.status;
+                    if (status === 401) {
+                      toast.error("Please log in again to share your brain.");
+                    } else if (status && status >= 500) {
+                      toast.error("Server error. Please try again later.");
+                    } else {
+                      toast.error("Failed to generate share link.");
+                    }
+                  } else {
+                    toast.error("Failed to generate share link.");
+                  }
                 }
               }}
               variant="secondary"
