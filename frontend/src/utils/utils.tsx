@@ -87,8 +87,18 @@ async function signin(
     toast.success("Login successful!");
     navigate("/dashboard");
   } catch (error) {
-    console.error(error);
-    toast.error("Invalid credentials. Try again.");
+    console.error("Signin error:", error);
+    if (axios.isAxiosError(error)) {
+      const status = error.response?.status;
+      if (status === 403) {
+        toast.error("Invalid credentials. Please try again.");
+      } else {
+        toast.error("Login failed. Please try again.");
+      }
+    } else {
+      toast.error("Network error. Please check your connection.");
+    }
+    throw error;
   }
 }
 

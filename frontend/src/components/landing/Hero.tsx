@@ -2,11 +2,23 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { ButtonL } from "./ButtonL";
 import { useNavigate } from "react-router-dom";
 import { signin } from "../../utils/utils";
+import { useState } from "react";
 
 export default function Hero() {
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleDemoLogin = async () => {
-    await signin("rishav", "1234", navigate);
+    if (isLoading) return;
+
+    setIsLoading(true);
+    try {
+      await signin("rishav", "1234", navigate);
+    } catch (error) {
+      console.error("Demo login failed:", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -38,8 +50,9 @@ export default function Hero() {
             size="lg"
             className="text-lg px-8 bg-transparent border border-purple-500 text-purple-700 hover:bg-black"
             onClick={handleDemoLogin}
+            disabled={isLoading}
           >
-            Try Demo
+            {isLoading ? "Signing in..." : "Try Demo"}
           </ButtonL>
         </div>
       </div>
