@@ -4,6 +4,7 @@ import { Card } from "../components/Card";
 import { CreateContentModal } from "../components/CreateContentModal";
 import { PlusIcon } from "../icons/PlusIcon";
 import { ShareIcon } from "../icons/ShareIcon";
+import { MenuIcon } from "../icons/MenuIcon";
 import { Sidebar } from "../components/Sidebar";
 import { useContent } from "../hooks/userContent";
 import { BACKEND_URL } from "../config";
@@ -12,6 +13,7 @@ import axios from "axios";
 
 export function Dashboard() {
   const [modalOpen, setModalOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   type Content = {
     _id: string;
     title: string;
@@ -27,24 +29,45 @@ export function Dashboard() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const filteredContents = selectedType
     ? contents.filter((c) => c.type === selectedType.toLowerCase())
-    : contents;
+    : contents.filter((c) => c.type !== "twitter"); // Exclude Twitter from "All" section
 
   useEffect(() => {
     refresh();
   }, [modalOpen, refresh]);
 
   return (
-    <div>
-      <Sidebar onSelectType={setSelectedType} />
-      <div className="p-4 lg:ml-64 sm:ml-56 min-h-screen bg-gradient-to-br from-white via-indigo-100 to-purple-200  border-1-4 border-black">
+    <div className="min-h-screen flex h-screen">
+      <Sidebar
+        onSelectType={setSelectedType}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+      />
+
+      <div className="flex-1 p-4 bg-gradient-to-br from-white via-indigo-100 to-purple-200 h-full overflow-auto">
         <CreateContentModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}
         />
 
-        <div className="flex justify-between items-center mb-10">
+        {/* Mobile menu button */}
+        {!sidebarOpen && (
+          <button
+            onClick={() => {
+              console.log("Mobile menu button clicked");
+              setSidebarOpen(true);
+            }}
+            className="sm:hidden fixed top-4 left-4 z-50 p-3 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-700 transition-colors"
+          >
+            <MenuIcon />
+          </button>
+        )}
+
+        <div className="flex justify-between items-center mb-10 mt-12 sm:mt-0">
           <h1 className="text-4xl font-semibold text-purple-700 pl-9 px-5">
-            All Notes
+            All Notes{" "}
+            {sidebarOpen && (
+              <span className="text-sm text-red-500">(Sidebar Open)</span>
+            )}
           </h1>
 
           <div className="flex gap-4">
@@ -99,13 +122,10 @@ export function Dashboard() {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {filteredContents.length > 0 ? (
             filteredContents.map((item) => (
-              <div
-                key={item._id}
-                className="flex-grow sm:flex-grow-0 basis-[250px] max-w-[300px]"
-              >
+              <div key={item._id} className="w-full">
                 <Card
                   title={item.title}
                   link={item.link}

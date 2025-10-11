@@ -2,18 +2,27 @@ import { useRef } from "react";
 import { Button } from "../components/Button";
 import { Input } from "../components/input";
 import { Logo } from "../icons/Logo";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { signin } from "../utils/utils";
 
 export function Signin() {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignin = async () => {
     const username = usernameRef.current?.value || "";
     const password = passwordRef.current?.value || "";
-    await signin(username, password, navigate);
+
+    // Get the page user was trying to access, default to dashboard
+    const from = location.state?.from?.pathname || "/dashboard";
+
+    try {
+      await signin(username, password, () => navigate(from));
+    } catch {
+      // Error handling is done in the signin function
+    }
   };
 
   return (

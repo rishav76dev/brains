@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import Notfound from "./pages/Notfound";
 import Share from "./pages/Share";
 import { Toaster } from "react-hot-toast";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
         <Route path="/share/:shareLink" element={<Share />} />
         <Route path="*" element={<Notfound />} />
       </Routes>

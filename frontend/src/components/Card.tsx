@@ -49,8 +49,8 @@ export function Card({
   };
 
   return (
-    <div>
-      <div className="p-4 bg-gray-50 rounded-lg border border-gray-300 shadow-sm max-w-64 min-w-64 min-h-48">
+    <div className="w-full h-full">
+      <div className="p-4 bg-gray-50 rounded-lg border border-gray-300 shadow-sm w-full h-full flex flex-col">
         <div className="flex justify-between items-start">
           <div className="flex items-center text-md font-medium text-gray-800">
             <div className="pr-2 text-gray-600">
@@ -95,7 +95,7 @@ export function Card({
           )}
         </div>
 
-        <div className="pt-4">
+        <div className="pt-4 flex-1">
           {type === "youtube" && (
             <div>
               <iframe
