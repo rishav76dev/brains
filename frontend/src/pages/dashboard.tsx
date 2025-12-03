@@ -43,7 +43,8 @@ export function Dashboard() {
         onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex-1 p-4 bg-gradient-to-br from-white via-indigo-100 to-purple-200 h-full overflow-auto">
+      {/* Changed: Removed purple gradient -> clean slate background */}
+      <div className="flex-1 p-4 bg-slate-50 h-full overflow-auto">
         <CreateContentModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}
@@ -56,21 +57,25 @@ export function Dashboard() {
               console.log("Mobile menu button clicked");
               setSidebarOpen(true);
             }}
-            className="sm:hidden fixed top-4 left-4 z-50 p-3 bg-purple-600 text-white rounded-lg shadow-lg hover:bg-purple-700 transition-colors"
+            // Changed: Purple -> Workable Green
+            className="sm:hidden fixed top-4 left-4 z-50 p-3 bg-[#00835C] text-white rounded-lg shadow-lg hover:bg-[#006e4d] transition-colors"
           >
             <MenuIcon />
           </button>
         )}
 
-        <div className="flex justify-between items-center mb-10 mt-12 sm:mt-0">
-          <h1 className="text-4xl font-semibold text-purple-700 pl-9 px-5">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-10 mt-12 sm:mt-0 gap-4">
+          {/* Changed: Purple text -> Dark Navy (#1C2939) */}
+          <h1 className="text-4xl font-bold text-[#1C2939] pl-0 sm:pl-0 px-2">
             All Notes{" "}
             {sidebarOpen && (
-              <span className="text-sm text-red-500">(Sidebar Open)</span>
+              <span className="text-sm text-red-500 font-normal ml-2">
+                (Sidebar Open)
+              </span>
             )}
           </h1>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 w-full sm:w-auto px-2">
             <Button
               onClick={() => setModalOpen(true)}
               variant="primary"
@@ -122,7 +127,7 @@ export function Dashboard() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 px-2">
           {filteredContents.length > 0 ? (
             filteredContents.map((item) => (
               <div key={item._id} className="w-full">
@@ -136,7 +141,11 @@ export function Dashboard() {
               </div>
             ))
           ) : (
-            <p className="text-gray-600">No content found.</p>
+            <div className="col-span-full text-center py-20">
+              <p className="text-slate-400 text-lg">
+                No content found. Click "Add content" to get started.
+              </p>
+            </div>
           )}
         </div>
       </div>

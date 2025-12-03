@@ -12,12 +12,15 @@ interface ButtonProps {
 }
 
 const variantClasses = {
-  primary: "bg-purple-600 text-white text-xl font-semibold hover:bg-purple-800 focus:ring-purple-400",
-  secondary: "bg-purple-200 text-purple-700 hover:bg-purple-300 focus:ring-purple-300",
+  // Workable Green
+  primary: "bg-[#00835C] text-white hover:bg-[#006e4d] focus:ring-[#00835C]",
+  // Clean Slate Gray (Neutral)
+  secondary:
+    "bg-slate-100 text-slate-700 hover:bg-slate-200 focus:ring-slate-300",
 };
 
 const defaultStyles =
-  "px-4 py-2 rounded-xl font-medium flex items-center justify-center gap-2 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed border-2 border-black";
+  "px-4 py-2 rounded-md text-sm font-medium flex items-center justify-center gap-2 transition-colors duration-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-1 disabled:opacity-50 disabled:cursor-not-allowed";
 
 export function Button({
   variant,
@@ -26,6 +29,7 @@ export function Button({
   onClick,
   loading = false,
   fullWidth = false,
+  className,
 }: ButtonProps) {
   const fullWidthClass = fullWidth ? "w-full" : "";
 
@@ -36,7 +40,10 @@ export function Button({
       disabled={loading}
       aria-busy={loading}
       className={twMerge(
-        `${variantClasses[variant]} ${defaultStyles} ${fullWidthClass}`
+        variantClasses[variant],
+        defaultStyles,
+        fullWidthClass,
+        className
       )}
     >
       {loading ? (
@@ -55,7 +62,7 @@ export function Button({
 function Spinner() {
   return (
     <svg
-      className="animate-spin h-5 w-5 text-white"
+      className="animate-spin h-5 w-5 text-current"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"

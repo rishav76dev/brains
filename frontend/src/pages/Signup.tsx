@@ -17,29 +17,35 @@ export function Signup() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-white via-indigo-100 to-purple-400 flex justify-center items-center px-4">
-      <div className="bg-white rounded-2xl shadow-lg border-black border w-full max-w-sm p-6 sm:p-8 space-y-5">
-        <div className="text-center flex flex-col items-center text-purple-600 space-y-2">
-          <Logo /> {/* Adjust size as preferred */}
-          <h1 className="text-3xl font-semibold text-gray-800">Join Brainly</h1>
-          <p className="text-md text-gray-500 pt-1 text-balance text-center ">
+    <div className="min-h-screen w-full bg-slate-100 flex justify-center items-center px-4">
+      <div className="bg-white rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 w-full max-w-sm p-6 space-y-6">
+        {/* Header */}
+        <div className="text-center flex flex-col items-center space-y-2">
+          <Logo />
+          <h1 className="text-2xl font-semibold text-[#1C2939]">
+            Join Brainly
+          </h1>
+          <p className="text-sm text-slate-500 leading-relaxed">
             Save tweets, documents,
             <br />
             YouTube videos to free your mind
           </p>
         </div>
 
-        <div className="space-y-4 ">
+        {/* Inputs */}
+        <div className="space-y-4">
           <div>
-            <p className="font-medium text-xl pl-2">Username</p>
+            <p className="font-medium text-[#1C2939] pb-1">Username</p>
             <Input reference={usernameRef} placeholder="Username" />
           </div>
+
           <div>
-            <p className="font-medium text-xl pl-2">Password</p>
+            <p className="font-medium text-[#1C2939] pb-1">Password</p>
             <Input reference={passwordRef} placeholder="Password" />
           </div>
         </div>
 
+        {/* Actions */}
         <div className="pt-2">
           <Button
             onClick={handleSignup}
@@ -48,11 +54,12 @@ export function Signup() {
             text="Sign up"
             fullWidth={true}
           />
-          <p className="text-center text-gray-600 text-sm pt-4">
+
+          <p className="text-center text-slate-600 text-sm pt-4">
             Already have an account?{" "}
             <span
               onClick={() => navigate("/signin")}
-              className="text-purple-600 hover:text-purple-800 cursor-pointer font-medium"
+              className="text-[#00835C] hover:text-[#006e4d] cursor-pointer font-medium"
             >
               Sign in
             </span>
