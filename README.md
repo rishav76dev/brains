@@ -1,4 +1,4 @@
-V2 landing page inspiration - https://www.landingfolio.com/inspiration/post/enterpret?category=landing-page   will start working on this
+
 # 🧠 Brains
 
 **Brains** is a full-stack **MERN** (MongoDB, Express, React, Node.js) application that allows authenticated users to manage notes and learning content efficiently — enabling them to **create**, **update**, and **delete** their materials with ease.
