@@ -50,20 +50,24 @@ export function Card({
 
   return (
     <div className="w-full h-full">
-      <div className="p-4 bg-gray-50 rounded-lg border border-gray-300 shadow-sm w-full h-full flex flex-col">
-        <div className="flex justify-between items-start">
-          <div className="flex items-center text-md font-medium text-gray-800">
-            <div className="pr-2 text-gray-600">
+      {/* Changed: bg-gray-50 -> bg-white, softer border */}
+      <div className="p-5 bg-white rounded-lg border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 w-full h-full flex flex-col">
+        <div className="flex justify-between items-start mb-4">
+          {/* Changed: text-gray-800 -> text-[#1C2939] (Dark Navy) */}
+          <div className="flex items-center text-md font-semibold text-[#1C2939] leading-snug">
+            {/* Changed: text-gray-600 -> text-[#00835C] (Workable Green) */}
+            <div className="pr-3 text-[#00835C]">
               {type === "twitter" && <TwitterIcon />}
               {type === "youtube" && <YoutubeIcon />}
               {type === "document" && <DocumentIcon />}
             </div>
             {title}
           </div>
+
           {!readOnly && (
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
               <div
-                className="text-gray-600 cursor-pointer"
+                className="text-slate-400 hover:text-[#00835C] cursor-pointer transition-colors"
                 onClick={async () => {
                   try {
                     await navigator.clipboard.writeText(link);
@@ -77,7 +81,7 @@ export function Card({
                 {(type === "twitter" || type === "youtube") && <ShareIcon />}
               </div>
 
-              <div className="text-gray-600 cursor-pointer">
+              <div className="text-slate-400 hover:text-red-500 cursor-pointer transition-colors">
                 <a
                   href="#"
                   onClick={(e) => {
@@ -95,11 +99,11 @@ export function Card({
           )}
         </div>
 
-        <div className="pt-4 flex-1">
+        <div className="flex-1">
           {type === "youtube" && (
             <div>
               <iframe
-                className="w-full aspect-video rounded-md border border-gray-300"
+                className="w-full aspect-video rounded-md border border-slate-100 bg-slate-50"
                 src={embedUrl}
                 title={title}
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -110,13 +114,13 @@ export function Card({
                 }}
               />
               {iframeError && (
-                <div className="mt-2 p-2 bg-red-50 text-red-700 rounded text-sm">
+                <div className="mt-2 p-3 bg-red-50 text-red-600 rounded text-sm border border-red-100">
                   Failed to load video.
                   <a
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="underline ml-1"
+                    className="underline ml-1 font-medium"
                   >
                     Open in YouTube
                   </a>
@@ -132,14 +136,15 @@ export function Card({
           )}
 
           {type === "document" && description && (
-            <div className="bg-gray-100 rounded-lg p-3 border border-gray-300">
-              <div className="text-gray-700 text-sm leading-relaxed whitespace-pre-wrap">
+            // Changed: bg-gray-100 -> bg-slate-50, border-slate-100
+            <div className="bg-slate-50 rounded-lg p-4 border border-slate-100 mt-1">
+              <div className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap">
                 {isExpanded ? description : truncateText(description, 150)}
               </div>
               {description.length > 150 && (
                 <button
                   onClick={() => setIsExpanded(!isExpanded)}
-                  className="mt-2 text-gray-600 hover:text-gray-800 text-xs font-medium"
+                  className="mt-2 text-[#00835C] hover:text-[#006e4d] text-xs font-semibold uppercase tracking-wide"
                 >
                   {isExpanded ? "Show Less" : "Show More"}
                 </button>

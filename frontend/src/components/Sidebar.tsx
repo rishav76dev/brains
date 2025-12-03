@@ -35,7 +35,7 @@ export function Sidebar({
       {/* Mobile Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 sm:hidden"
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 sm:hidden"
           onClick={handleClose}
         />
       )}
@@ -45,22 +45,25 @@ export function Sidebar({
         className={`
           h-screen pl-6 pr-4 py-6
           flex flex-col w-64 flex-shrink-0
-          bg-gradient-to-b from-purple-50 via-purple-100 to-purple-200
-          border-r-8 border-purple-300
+          bg-[#1C2939] text-white
+          border-r border-slate-800
           transition-transform duration-300 ease-in-out
           ${isOpen ? "translate-x-0" : "-translate-x-full sm:translate-x-0"}
           fixed top-0 left-0 z-50 sm:static sm:z-auto
+          shadow-xl sm:shadow-none
         `}
       >
         {/* Header with close button for mobile */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-2 text-purple-600">
+          <div className="flex items-center space-x-2 text-[#00835C]">
             <Logo />
-            <span className="text-xl font-semibold text-gray-800">Brainly</span>
+            <span className="text-xl font-bold text-white tracking-tight">
+              Brainly
+            </span>
           </div>
           <button
             onClick={handleClose}
-            className="sm:hidden text-gray-600 hover:text-gray-800"
+            className="sm:hidden text-slate-400 hover:text-white transition-colors"
           >
             <CrossIcon />
           </button>
@@ -99,6 +102,7 @@ export function Sidebar({
               text="Logout"
               startIcon={<Logout />}
               fullWidth={true}
+              className="bg-[#00835C] hover:bg-[#006e4d] text-white border-none shadow-sm"
             />
           </div>
         </div>

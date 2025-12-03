@@ -8,15 +8,20 @@ export interface ButtonLProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const sizeClasses = {
   sm: "h-8 px-3 text-sm",
-  md: "h-9 px-4 text-sm",
-  lg: "h-11 px-6 text-base",
+  md: "h-10 px-5 text-sm", // Adjusted height slightly for better touch target
+  lg: "h-12 px-8 text-base",
 };
 
 const variantClasses = {
-  default: "text-primary-foreground bg-gradient-to-r from-blue-600 to-purple-600 hover:bg-primary/90",
-  outline: "border-[0.2px] border-black bg-transparent hover:bg-black hover:text-white transition-colors",
+  // Workable Green Solid
+  default: "text-white bg-[#00835C] hover:bg-[#006e4d] shadow-sm",
 
-  secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+  // Clean Gray Outline -> Hover Green
+  outline:
+    "border border-slate-300 bg-white text-slate-700 hover:border-[#00835C] hover:text-[#00835C] hover:bg-slate-50 transition-all",
+
+  // Secondary Gray
+  secondary: "bg-slate-100 text-slate-900 hover:bg-slate-200",
 };
 
 export const ButtonL = forwardRef<HTMLButtonElement, ButtonLProps>(
@@ -25,8 +30,8 @@ export const ButtonL = forwardRef<HTMLButtonElement, ButtonLProps>(
       <button
         ref={ref}
         className={twMerge(
-          "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium rounded-md transition-colors",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background",
+          "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium rounded-md transition-colors duration-200",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#00835C] focus-visible:ring-offset-2 ring-offset-white",
           "disabled:opacity-50 disabled:pointer-events-none",
           "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
           sizeClasses[size],
